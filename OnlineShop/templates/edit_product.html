@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnLineShop - Edit Product</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+  <link rel="icon" href="{{url_for('static', filename='logo.png')}}">
+  <style>
+    /* Resetting default browser styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      background-color: #f8f8f8; /* Light gray background */
+    }
+
+    .nav {
+      background-color: #032220; /* Slightly darker navigation bar */
+      color: #fff;
+      padding: 10px;
+      text-align: center; /* Center aligned links */
+    }
+    .nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px; /* Increased margin for better spacing */
+    }
+    .nav a:hover {
+      text-decoration: underline;
+    }
+    h2 {
+      text-align: center;
+      margin-top: 20px;
+    }
+    form {
+      margin: 20px auto;
+      width: 60%;
+    }
+    table {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    td {
+      padding: 10px;
+    }
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      margin-bottom: 10px;
+    }
+    input[type="submit"] {
+      display: block;
+      margin: 0 auto;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      background-color: #02452B;
+      color: #fff;
+      cursor: pointer;
+    }
+    input[type="submit"]:hover {
+      background-color: #032220; /* Slightly darker hover color */
+    }
+    header {
+      font-family: 'Acme', sans-serif;
+      background-color: #02452B; /* Dark green header */
+      color: #fff;
+      padding: 20px 0; /* Increased padding for better visibility */
+      text-align: center;
+    }
+    .navigation {
+      background-color: #032220; /* Slightly darker navigation bar */
+      color: #fff;
+      padding: 10px;
+      text-align: center; /* Center aligned links */
+    }
+    .navigation a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px; /* Increased margin for better spacing */
+    }
+    .navigation a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bellezza - Your Online Shopping Destination</h1>
+  </header>
+  <div class="navigation">
+    <p><a href="/">Home</a> > <a href="/sell">Sell</a> > <a href="/viewproduct/">View Product</a> > <a href="/viewproduct/{{prodID}}">{{name}}</a> > <a href="">Edit</a></p>
+  </div>
+  <h2>Edit Product</h2>
+  <form action="" method="POST">
+    <table>
+      <tr>
+        <td>NAME :</td><td><input type="text" name="name" value="{{name}}" required></td>
+      </tr>
+      <tr>
+        <td>QUANTITY :</td><td><input type="number" name="qty" value="{{qty}}" min="0" required></td>
+      </tr>
+      <tr>
+        <td>CATEGORY :</td>
+        <td>
+          <select name="category" required>
+            <option value="Electronics and Tech" {% if category=="Electronics and Tech" %}selected{% endif %}>Electronics and Tech</option>
+            <option value="Fashion" {% if category=="Fashion" %}selected{% endif %}>Fashion</option>
+            <option value="Educational Utilities" {% if category=="Educational Utilities" %}selected{% endif %}>Educational Utilities</option>
+            <option value="Entertainment and Recreation" {% if category=="Entertainment and Recreation" %}selected{% endif %}>Entertainment and Recreation</option>
+            <option value="Food and Groceries" {% if category=="Food and Groceries" %}selected{% endif %}>Food and Groceries</option>
+            <option value="Daily Utilities" {% if category=="Daily Utilities" %}selected{% endif %}>Daily Utilities</option>
+            <option value="Sports" {% if category=="Sports" %}selected{% endif %}>Sports</option>
+            <option value="Luggage" {% if category=="Luggage" %}selected{% endif %}>Luggage</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>PRICE :</td><td><input type="number" name="price" value="{{price}}" min="0" required></td>
+      </tr>
+      <tr>
+        <td>DESCRIPTION :</td><td><textarea name="desp">{{desp}}</textarea></td>
+      </tr>
+    </table>
+    <input type="submit" value="Apply Changes">
+  </form>
+</body>
+</html>

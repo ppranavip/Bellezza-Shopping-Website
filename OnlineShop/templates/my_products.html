@@ -1,0 +1,139 @@
+<html>
+<head>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+  <link rel='icon' href="{{url_for('static', filename='logo.png')}}">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      background-color: #f8f8f8; /* Light gray background */
+    }
+    header {
+      font-family: 'Acme', sans-serif;
+      background-color: #02452B; /* Dark green header */
+      color: #fff;
+      padding: 20px 0; /* Increased padding for better visibility */
+      text-align: center;
+    }
+    .navigation {
+      background-color: #032220; /* Slightly darker navigation bar */
+      color: #fff;
+      padding: 10px;
+      text-align: center; /* Center aligned links */
+    }
+    .navigation a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px; /* Increased margin for better spacing */
+    }
+    .navigation a:hover {
+      text-decoration: underline;
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .card {
+      width: 300px;
+      background-color: #f9f9f9;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      padding: 10px;
+      background-color: #333;
+      color: white;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+
+    .card-body {
+      padding: 15px;
+    }
+
+    .card-body p {
+      margin: 5px 0;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px; /* Fixed height for images */
+      object-fit: cover; /* Ensure images cover the entire space */
+      border-top-left-radius: 10px; /* Increased border radius for smoother edges */
+      border-top-right-radius: 10px; /* Increased border radius for smoother edges */
+    }
+    .card-body a {
+      text-decoration: none;
+      color: #007bff;
+    }
+
+    .card-body a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bellezza - Your Online Shopping Destination</h1>
+  </header>
+  <div class="navigation">
+    <p><a href="/">Home</a> > <a href="">Sell</a></p>
+    </div>
+  <div class="navigation">
+    <a href="">My Products</a>
+    <a href="./neworders">New Orders</a>
+    <a href="./addproducts">Add New Products</a>
+    <a href="./sales">My Sales</a>
+  </div>
+  <div class="centerthis">
+    <form action="" method="POST" onsubmit="return checkSelect()">
+      <h3><input type="radio" value="by keyword" name="search method" checked>Search by keyword</h3>
+      <input type="search" name="keyword" value="">
+      <br>
+      <h3><input type="radio" value="by category" name="search method">Search by category</h3>
+      <select name="category">
+        <option value="" disabled selected>SELECT CATEGORY</option>
+        {% for item in categories %}
+        <option value="{{item}}">{{item}}</option>
+        {% endfor %}
+      </select>
+      <br>
+      <h3><input type="radio" value="both" name="search method">Both</h3>
+      <br>
+      <p><input type="submit" value="SEARCH"></p>
+    </form>
+  </div>
+  <br><br>
+  {% if after_srch %}
+    {% if results|length==0 %}
+      <p>No results match your search</p>
+    {% else %}
+      <div class="card-container">
+        {% for i in results %}
+          <div class="card">
+            <img src="{{ url_for('static', filename='images/' + i[1].replace(' ', '_') + '.jpg') }}" alt="Image">
+            <div class="card-body">
+              <div class=""><b>{{ i[1] }}</b></div>
+              <p>Quantity: {{ i[2] }}</p>
+              <p>Category: {{ i[3] }}</p>
+              <p>Price: ₹ {{ i[4] }}</p>
+              <a href="/viewproduct/{{ i[0] }}">View</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endif %}
+  <script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
+</body>
+</html>

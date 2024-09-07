@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bellezza - Your Online Shopping Destination</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+  <link rel='icon' href="{{url_for('static', filename='logo.png')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* CSS styles */
+    /* Header styles */
+    body {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  background-image: url("{{url_for('static', filename='banner2.jpeg')}}");
+  background-size: cover;
+  background-color: rgba(244, 244, 244, 0.5);
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: #333;
+  line-height: 1.6;
+}
+
+    header {
+      background-color: #032220;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      display: flex;
+      justify-content: space-between;
+    }
+    header h1 {
+      margin: 0;
+      font-family: 'Acme', sans-serif;
+      font-size: 2.5em;
+    }
+    nav {
+      background-color: #032220;
+      padding: 10px 0;
+      text-align: center;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      padding: 5px 15px;
+      transition: all 0.3s ease;
+    }
+    nav a:hover {
+      background-color: #036735;
+    }
+    /* Container styles */
+    .container {
+      margin: 0 auto;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    /* Card styles */
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      display: flex;
+      width: 70%;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: auto;
+      align-self: center;
+      transform: scale(0.8);
+    }
+    .card-content {
+      width: 100%;
+    }
+
+    .form-row {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 10px; /* Added spacing between form rows */
+    }
+    .form-group {
+      margin-bottom: 15px;
+      width: 100%;
+    }
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="password"] {
+      width: 80%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    .form-group input[type="radio"] {
+      margin-right: 5px;
+    }
+    .submit-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border: none;
+      border-radius: 5px;
+      background-color: #02452B;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .submit-btn:hover {
+      background-color: #036735;
+    }
+    .error-msg {
+      color: red;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1 style="padding-left: 10px;">Bellezza - Your Online Shopping Destination</h1>
+    <nav>
+      <a href="/">Home</a>
+      <a href="">Create Account</a>
+    </nav>
+  </header>
+  {% if not ok %}
+    <p class="error-msg">Sorry! Account with provided email already exists. Please enter another email</p>
+  {% endif %}
+  <div class="container">
+    <form action="" method="POST" onsubmit="return checkEqual()" class="card">
+      <div class="card-content">
+        <h2>Create New Account:</h2>
+        <div class="form-group">
+          <label for="type">Type of Account:</label>
+          <input type="radio" value="Customer" name="type" checked>Customer
+          <input type="radio" value="Seller" name="type">Seller
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" name="name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" name="email" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone:</label>
+            <input type="tel" name="phone" required>
+          </div>
+        </div>
+        <div><label><b>Address:</b></label></div> <!-- Adjusted alignment -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="area">Landmark/Area:</label>
+            <input type="text" name="area" required>
+          </div>
+          <div class="form-group">
+            <label for="locality">Locality:</label>
+            <input type="text" name="locality" required>
+          </div>
+          <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" name="city" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="state">State:</label>
+            <input type="text" name="state" required>
+          </div>
+          <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" name="country" required>
+          </div>
+          <div class="form-group">
+            <label for="zip">Zipcode:</label>
+            <input type="text" name="zip" required>
+          </div>
+        </div>
+        <div><label><b>Update your Password:</b></label></div> <!-- Adjusted alignment -->
+        <div class="form-row">
+          <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" name="password" required>
+          </div>
+          <div class="form-group">
+            <label for="cnfrm_psswd">Re-enter Password:</label>
+            <input type="password" name="cnfrm_psswd" required>
+          </div>
+        </div>
+        <p><input type="submit" value="Submit" class="submit-btn"></p>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bellezza - Your Online Shopping Destination</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+  <link rel='icon' href="{{url_for('static', filename='logo.png')}}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    /* Additional styles specific to this page */
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      margin: 0;
+      padding: 0;
+    font-size: 1.5vw;
+    background-image: url("{{url_for('static', filename='banner1.jpeg')}}");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: rgb(79, 77, 77);
+    max-width: 100%;
+    overflow-x: hidden;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    header {
+      background-color: #032220;
+      color: #fff;
+      padding: 2px 0;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-family: 'Acme', sans-serif;
+      font-size: 2.5em;
+    }
+    nav {
+      background-color: #032220;
+      padding: 10px 0;
+      text-align: center;
+      display: flex; /* Use flexbox for layout */
+      justify-content: space-between; /* Push items to the edges */
+      align-items: center; /* Center vertically */
+    }
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin-left: 1rem;
+      display: flex; /* Use flexbox for layout */
+    }
+    nav ul li {
+      margin-right: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.2em;
+    }
+    .search-bar {
+      display: flex; /* Use flexbox for layout */
+      align-items: center; /* Center vertically */
+      margin-right: 1rem;
+    }
+    .search-bar input[type="text"] {
+      width: 200px;
+      padding: 5px;
+      border-radius: 5px 0 0 5px;
+      border: none;
+      outline: none;
+      margin: 1rem;
+      margin-right: 1px;
+    }
+    .search-bar button {
+      padding: 9px 10px;
+      border: none;
+      background-color: 02452B;
+      color: #02452B;
+      border-radius: 0 5px 5px 0;
+      cursor: pointer;
+    }
+    .search-bar button:hover {
+      background-color: #02452B;
+      color: white;
+    }
+    .hero {
+      background-image: url('banner.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      text-align: center;
+      padding: 100px 0;
+      color: white;
+    }
+    .hero h2 {
+      font-size: 3em;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 1.5em;
+    }
+    .product-section {
+      padding: 50px 0;
+      background-color: #f9f9f9;
+    }
+    .product-section h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .product-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .product {
+      width: 300px;
+      margin: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .product img {
+      width: 100%;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+    }
+    .product-info {
+      padding: 20px;
+    }
+    .product-info h3 {
+      margin-top: 0;
+    }
+
+    footer {
+      background-color: #032220;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .subhead{
+      color: #02452B;
+    }
+    .card {
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 20px; /* Adjust margin as needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.card-image {
+    flex: 1;
+}
+
+.card-image img {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    flex: 2;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.card-content h2 {
+    margin-top: 0;
+}
+
+.card-content p {
+    margin-bottom: 10px;
+}
+
+.card-content a {
+    display: block;
+    margin-bottom: 5px;
+    text-decoration: none;
+    color: #007bff; /* Adjust link color */
+}
+
+.card-content a:hover {
+    text-decoration: underline;
+}
+  .info-section{
+    padding: 50px 50px;
+    background-color: #f9f9f9;
+  }
+  .move a{
+      padding: 1rem 1rem;
+      padding-top: 9px;
+      border: none;
+      background-color: #02452B;
+      color: white;
+      border-radius: 5px 5px 5px 5px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .move a:hover {
+      background-color: white;
+      color: #02452B;
+    }
+    #myinfo{
+      padding: 4rem;
+    }
+    .footer-links {
+    display: flex;
+    justify-content: space-between;
+}
+
+.keep-in-touch,
+.useful-links {
+    flex: 1;
+}
+
+.keep-in-touch h3,
+.useful-links h3 {
+    color: #fff;
+}
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.social-icons li {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.social-icons li:last-child {
+    margin-right: 0;
+}
+
+.social-icons a {
+    color: #fff;
+    font-size: 16px; /* Adjust the font size as needed */
+}
+
+.useful-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.useful-links li {
+    margin-bottom: 10px;
+}
+
+.useful-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.useful-links a:hover {
+    text-decoration: underline;
+}
+.product-info button{
+  background-color: #02452B;
+  color: white;
+  border: none;
+  padding: 10px;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bellezza - Your Online Shopping Destination</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/signup">Sign Up</a></li>
+      {% if signedin %}
+        <li><a href="/viewprofile/">View Profiles</a></li>
+        <li><a href="/editprofile">Edit Profile</a></li>
+        {% if type=="Customer" %}
+          <li><a href="/buy">Buy Items</a></li>
+        {% elif type=="Seller" %}
+          <li><a href="/sell">Sell Items</a></li>
+        {% endif %}
+        <li><a href="/changepassword">Change Password</a></li>
+        <li><a href="/logout">Logout</a></li>
+      {% else %}
+        <li><a href="/login">Login</a></li>
+      {% endif %}
+    </ul>
+    <div class="search-bar">
+      <input type="text" placeholder="Search...">
+      <button>Search</button>
+    </div>
+  </nav>
+  
+  <div class="container">
+    <div class="hero">
+      <h2 style = "margin:2rem; margin-top: 0px;">Discover the latest trends in fashion and beauty!</h2>
+      <p>Shop now and elevate your style with Bellezza.</p>
+    {% if not signedin %}
+      <p style="text-align: center;" class="move"><a href="/signup">Explore</a></p>
+    {% endif %}
+  </div>
+  </div>
+  <div class="info-section">
+    <div class="card">
+      <div class="card-image">
+          <img src="{{url_for('static', filename='mylogo.png')}}" alt="Image">
+      </div>
+      <div class="card-content">
+          <h2 style="text-align: center;">Overview</h2>
+          <p style="margin: 1rem;">Welcome to Bellezza - where fashion meets expression. Discover the latest trends in clothing, accessories, and beauty products curated to inspire and empower your unique style. Elevate your wardrobe with chic essentials and statement pieces that reflect your individuality. Shop confidently with our secure payment options and fast shipping. Join our vibrant community and experience the beauty of Bellezza - your ultimate fashion destination.</p>
+          <a href="#" style="margin: 1rem;padding: 10px; color: #02452B;">Learn More</a>
+      </div>
+  </div>
+  </div>
+
+  <!-- Inserted Content -->
+  <div class="info-section" id="myinfo">
+    <h2>Welcome to Bellezza - Your Ultimate Fashion Destination</h2>
+    <p>At Bellezza, we believe that fashion is more than just clothing; it's a statement, an expression of your unique personality and style. Our mission is to empower individuals to embrace their individuality and celebrate their beauty through fashion.</p>
+    <h3>Discover the Latest Trends</h3>
+    <p>Explore our extensive collection of the latest trends in fashion and beauty. From chic streetwear to elegant evening gowns, we curate a diverse range of styles to suit every taste and occasion. Stay ahead of the curve with our constantly updated selection of must-have pieces.</p>
+    <h3>Elevate Your Style</h3>
+    <p>Whether you're looking to refresh your wardrobe with timeless classics or experiment with bold new looks, Bellezza has everything you need to elevate your style game. Browse our carefully curated selection of clothing, accessories, and beauty products to find the perfect pieces to complement your unique sense of style.</p>
+    <h3>Shop with Confidence</h3>
+    <p>At Bellezza, we're committed to providing an exceptional shopping experience for every customer. With our user-friendly interface, secure payment options, and fast, reliable shipping, you can shop with confidence knowing that your satisfaction is our top priority.</p>
+    <h3>Join the Bellezza Community</h3>
+    <p>Be part of a vibrant community of fashion enthusiasts from around the world. Connect with like-minded individuals, share style inspiration, and discover new trends together. Follow us on social media and sign up for our newsletter to stay informed about the latest promotions, events, and fashion tips.</p>
+    <h3>Experience the Beauty of Bellezza</h3>
+    <p>Indulge your senses and immerse yourself in the beauty of Bellezza. From our stunning photography to our carefully curated collections, every aspect of our website is designed to inspire and delight. Join us on a journey of discovery and let Bellezza be your guide to the world of fashion and beauty.</p>
+  </div>
+  <!-- End Inserted Content -->
+
+  <div class="product-section">
+    <div class="container">
+      <h2 class="subhead">Featured Products</h2>
+      <div class="product-list">
+        <!-- Example Product -->
+        <div class="product">
+          <img src="{{url_for('static', filename='home1.jpg')}}" alt="Product 1">
+          <div class="product-info">
+            <h3>Women Kurta</h3>
+            <p>₹ 800</p>
+            <div class="ratings">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+            </div><br>
+            <button>Add to Cart</button>
+          </div>
+        </div>        
+        <div class="product">
+          <img src="{{url_for('static', filename='home2.jpg')}}" alt="Product 1">
+          <div class="product-info">
+            <h3>Lakme Foundation</h3>
+            <p>₹ 540</p>
+            <div class="ratings">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+            </div><br>
+            <button>Add to Cart</button>
+          </div>
+        </div>        
+        <div class="product">
+          <img src="{{url_for('static', filename='home3.jpg')}}" alt="Product 1">
+          <div class="product-info">
+            <h3>Women White Dial</h3>
+            <p>₹ 1040</p>
+            <div class="ratings">
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star checked"></span>
+              <span class="fa fa-star"></span>
+            </div><br>
+            <button>Add to Cart</button>
+          </div>
+        </div> 
+        <!-- Add more products here -->
+      </div>
+    </div>
+  </div>
+  <div class="product-section">
+    <div class="container">
+      <h2 class="subhead">Shop by Category</h2>
+      <div class="product-list">
+        <!-- Example Category -->
+        <div class="product">
+          <img src="{{url_for('static', filename='women.jpg')}}" alt="Image" height="400px">
+          <div class="product-info">
+            <h3>Ethnics</h3>
+            <a href="">Explore</a>
+          </div>
+        </div>
+        <div class="product">
+          <img src="{{url_for('static', filename='Accessories.jpg')}}" alt="Category 1" height="400px">
+          <div class="product-info">
+            <h3>Accessories</h3>
+            <a href="/category/category1">Explore</a>
+          </div>
+        </div>
+        <div class="product">
+          <img src="{{url_for('static', filename='Beauty.jpg')}}" alt="Category 1" height="400px">
+          <div class="product-info">
+            <h3>Beauty</h3>
+            <a href="/category/category1">Explore</a>
+          </div>
+        </div>
+        <!-- Add more categories here -->
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div>
+        <div class="footer-links">
+            <div class="useful-links">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Shipping & Returns</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+            <div class="keep-in-touch">
+              <h3>Keep in Touch</h3>
+              <ul class="social-icons">
+                  <li><a href="#"><i class="fa fa-facebook fa-sm"></i></a></li>
+                  <li><a href="#"><i class="fa fa-twitter fa-sm"></i></a></li>
+                  <li><a href="#"><i class="fa fa-instagram fa-sm"></i></a></li>
+                  <li><a href="#"><i class="fa fa-pinterest fa-sm"></i></a></li>
+              </ul>
+          </div>
+        </div>
+        <p>Contact us at support@bellezza.com</p>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OnLineShop - Buy</title>
+  <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
+  <link href="https://fonts.googleapis.com/css?family=Acme|K2D" rel="stylesheet">
+  <link rel="icon" href="{{url_for('static', filename='logo.png')}}">
+  <style>
+    /* Resetting default browser styles */
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+      background-color: #f8f8f8; /* Light gray background */
+    }
+    header {
+      font-family: 'Acme', sans-serif;
+      background-color: #02452B; /* Dark green header */
+      color: #fff;
+      padding: 20px 0; /* Increased padding for better visibility */
+      text-align: center;
+    }
+    .navigation {
+      background-color: #032220; /* Slightly darker navigation bar */
+      color: #fff;
+      padding: 10px;
+      text-align: center; /* Center aligned links */
+    }
+    .navigation a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px; /* Increased margin for better spacing */
+    }
+    .navigation a:hover {
+      text-decoration: underline;
+    }
+    .search-form {
+      text-align: center;
+      margin-top: 30px; /* Increased margin for better separation */
+    }
+    .search-form h3 {
+      display: inline-block;
+      margin-right: 10px;
+      color: #02452B; /* Dark green text color */
+    }
+    .search-form input[type="search"],
+    .search-form select {
+      width: 250px; /* Slightly reduced width for better alignment */
+      padding: 10px; /* Increased padding for better input field appearance */
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin: 0 10px;
+    }
+    .search-form input[type="submit"] {
+      padding: 12px 25px; /* Increased padding for better button appearance */
+      border: none;
+      border-radius: 5px;
+      background-color: #02452B;
+      color: #fff;
+      cursor: pointer;
+    }
+    .search-form input[type="submit"]:hover {
+      background-color: #032220; /* Slightly darker hover color */
+    }
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px; /* Increased margin for better separation */
+    }
+    .card {
+      width: 280px; /* Reduced card width for better spacing */
+      margin: 15px;
+      background-color: #fff;
+      border-radius: 10px; /* Increased border radius for smoother edges */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Enhanced box shadow for depth */
+    }
+    .card img {
+      width: 100%;
+      height: 200px; /* Fixed height for images */
+      object-fit: cover; /* Ensure images cover the entire space */
+      border-top-left-radius: 10px; /* Increased border radius for smoother edges */
+      border-top-right-radius: 10px; /* Increased border radius for smoother edges */
+    }
+    .card-content {
+      padding: 20px;
+    }
+    .card-content h3 {
+      margin-top: 0;
+      color: #02452B; /* Dark green text color */
+    }
+    .card-content p {
+      margin-bottom: 10px;
+      color: #666; /* Slightly darker text color for description */
+    }
+    .card-content a {
+      display: block;
+      padding: 10px 0; /* Adjusted padding for better button alignment */
+      border: 1px solid #02452B;
+      border-radius: 5px;
+      background-color: #02452B;
+      color: #fff;
+      text-decoration: none;
+      text-align: center;
+    }
+    .card-content a:hover {
+      background-color: #032220;
+      border-color: #032220;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bellezza - Your Online Shopping Destination</h1>
+  </header>
+  <div class="navigation">
+    <a href="/">Home</a> > <a href="">Buy</a>
+  </div>
+  <div class="navigation">
+    <a href="">Search Products</a>
+    <a href="./myorders">My Orders</a>
+    <a href="./cart">My Cart</a>
+    <a href="./purchases">My Purchases</a>
+  </div>
+  <div class="search-form">
+    <form action="" method="POST" onsubmit="return checkSelect()">
+      <h3><input type="radio" value="by keyword" name="search method" checked>Search by keyword</h3>
+      <input type="search" name="keyword" placeholder="Enter keyword"><br>
+      <h3><input type="radio" value="by category" name="search method">Search by category</h3>
+      <select name="category">
+        <option value="" disabled selected>SELECT CATEGORY</option>
+        <option value="Women">Women</option>
+        <option value="Men">Men</option>
+        <option value="Kids">Kids</option>
+        <option value="Hand bags">Hand bags</option>
+        <option value="Footwear">Foot wear</option>
+        <option value="Beauty">Beauty</option>
+        <option value="Accessories">Accessories</option>
+        <option value="Electronics">Electronics</option>
+      </select><br>
+      <h3><input type="radio" value="both" name="search method">Both</h3>
+      <br>
+      <input type="submit" value="SEARCH">
+    </form>
+  </div>
+  <div class="card-container">
+    {% if after_srch %}
+      {% if results|length==0 %}
+        <p>No results match your search</p>
+      {% else %}
+        {% for item in results %}
+          <div class="card">
+            <div class="image-container">
+              <img src="{{ url_for('static', filename='images/' + item[1].replace(' ', '_') + '.jpg') }}" alt="Image">
+            </div>
+            <div class="card-content">
+              <h3>{{ item[1] }}</h3>
+              <p>Category: {{ item[2] }}</p>
+              <p>Price: ₹ {{ item[3] }}</p>
+              <a href="/viewproduct/{{ item[0] }}">View</a>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+  </div>
+  <script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
+</body>
+</html>
