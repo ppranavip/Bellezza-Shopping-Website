@@ -1,5 +1,6 @@
 # OnlineShop
 An E-Commerce Website using Flask(Python) Backend
+![download](https://github.com/user-attachments/assets/ca4419a0-cf8b-4eb2-bb16-73a4f820b59b)
 
 ## Components of the Project :
  - <strong>`__init__.py`</strong> : The main python program to be run in order to run the server(<em>Flask App</em>). This program takes Port Number as a command line argument.
